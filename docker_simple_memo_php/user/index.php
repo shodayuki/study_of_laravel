@@ -16,7 +16,7 @@
           if (isset($_SESSION['errors'])) {
               echo '<div class="alert alert-danger" role="alert">';
               foreach ($_SESSION['errors'] as $error) {
-                echo "<div>$error</div>";
+                echo "<div>{$error}</div>";
               }
               echo '</div>';
               unset($_SESSION['errors']);
