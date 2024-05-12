@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/memo', function() {
     return view('memo');
   })->name('memo.index');
+  Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('memo.logout');
 });
 
 Auth::routes();
