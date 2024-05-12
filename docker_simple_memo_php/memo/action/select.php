@@ -19,7 +19,7 @@ if ($statement = $database_handler->prepare("SELECT id, title, content FROM memo
   $result = $statement->fetch(PDO::FETCH_ASSOC);
 }
 
-$_SESSION['selected_memo'] = [
+$_SESSION['select_memo'] = [
   'id' => $result['id'],
   'title' => $result['title'],
   'content' => $result['content']
