@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Memo;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class MemoController extends Controller
 {
@@ -19,7 +20,8 @@ class MemoController extends Controller
 
       return view('memo', [
         'name' => $this->getLoginUserName(),
-        'memos' => $memos
+        'memos' => $memos,
+        'select_memo' => session()->get('select_memo')
       ]);
     }
 
@@ -40,11 +42,25 @@ class MemoController extends Controller
   }
 
   /**
+   * メモの選択
+   *
+   * @param Request $request
+   * @return RedirectResponse
+   */
+  public function select(Request $request): RedirectResponse
+  {
+    $memo = Memo::find($request->id);
+    session()->put('select_memo', $memo);
+
+    return redirect()->route('memo.index');
+  }
+
+  /**
    * ログインユーザー名取得
    *
    * @return string
    */
-  private function getLoginUserName()
+  private function getLoginUserName(): string
   {
     $user = Auth::user();
     $name = '';
