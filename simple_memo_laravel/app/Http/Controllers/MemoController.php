@@ -56,6 +56,20 @@ class MemoController extends Controller
   }
 
   /**
+   * メモの削除
+   *
+   * @param Request $request
+   * @return RedirectResponse
+   */
+  public function delete(Request $request): RedirectResponse
+  {
+    Memo::find($request->edit_id)->delete();
+    session()->remove('select_memo');
+
+    return redirect()->route('memo.index');
+  }
+
+  /**
    * ログインユーザー名取得
    *
    * @return string
