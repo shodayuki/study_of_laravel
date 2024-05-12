@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -40,8 +41,23 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function register(Request $request)
+  /**
+   * @param Request $request
+   * @return RedirectResponse
+   */
+    public function register(Request $request): RedirectResponse
     {
+      $request->validate([
+          'name' => 'required|max:255|regex:/^[a-zA-Z0-9]+$/',
+          'email' => 'required|max:255|email|unique:users',
+          'password' => 'required|max:255|min:8|regex:/^[a-zA-Z0-9]+$/'
+        ],
+        [
+          'name.regex' => ':attributeは半角英数字で入力してください。',
+          'password.regex' => ':attributeは半角英数字で入力してください。',
+        ]
+      );
+
       User::create([
         'name' => $request->name,
         'email' => $request->email,
