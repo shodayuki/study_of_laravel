@@ -32,7 +32,7 @@ class PenController extends Controller
       $pen = new Pen();
 
       $pen->name = $request->name;
-      $pen->price = $requset->price;
+      $pen->price = $request->price;
       $pen->save();
 
       return response()->json([
