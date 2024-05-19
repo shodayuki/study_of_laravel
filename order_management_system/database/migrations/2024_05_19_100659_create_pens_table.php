@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('pens', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->bigInteger('price');
             $table->timestamps();
         });
     }
