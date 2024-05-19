@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
 const http = axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: 'http://localhost:8000',
     withCredentials: true,
 });
 
@@ -22,7 +22,7 @@ const Pens = () => {
     }, []);
 
     return (
-        <div className="relative overflow-x-auto">
+        <div className="relative overflow-x-auto p-5">
             <table className="min-w-full divide-y dark:divide-neutral-700">
                 <thead>
                     <tr>
