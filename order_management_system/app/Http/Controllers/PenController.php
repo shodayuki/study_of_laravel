@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PenStoreRequest;
 use App\Models\Pen;
 use Illuminate\Http\Request;
 
@@ -24,10 +25,10 @@ class PenController extends Controller
     /**
      * 登録
      *
-     * @param Request $request
+     * @param PenStoreRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request): \Illuminate\Http\JsonResponse
+    public function store(PenStoreRequest $request): \Illuminate\Http\JsonResponse
     {
       $pen = new Pen();
 
