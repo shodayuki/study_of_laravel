@@ -74,20 +74,36 @@ class OrderController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
+  /**
+   * @param $id
+   * @return JsonResponse
+   */
+    public function edit($id): JsonResponse
     {
-        //
+        $pens = Pen::all();
+        $customers = Customer::all();
+        $order = Order::find($id);
+
+        return response()->json([
+          'data' => $order,
+          'pens' => $pens,
+          'customers' => $customers
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateOrderRequest $request, Order $order)
+  /**
+   * @param OrderStoreRequest $request
+   * @param Order $order
+   * @return JsonResponse
+   */
+    public function update(OrderStoreRequest $request, Order $order): JsonResponse
     {
-        //
+        $order->fill($request->all());
+        $order->save();
+
+        return response()->json([
+            'data' => $order
+        ], 200);
     }
 
     /**
