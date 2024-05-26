@@ -15,7 +15,7 @@ class PenController extends Controller
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
-      $pens = Pen::all();
+      $pens = Pen::paginate(4);
 
       return response()->json([
         'data' => $pens
