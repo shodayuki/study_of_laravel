@@ -56,6 +56,7 @@ class OrderController extends Controller
         $order->pen_id = $request->pen_id;
         $order->customer_id = $request->customer_id;
         $order->num = $request->num;
+        $order->shipping = 0;
         $order->orderday = date('Y-m-d H:i:s');
         $order->save();
 

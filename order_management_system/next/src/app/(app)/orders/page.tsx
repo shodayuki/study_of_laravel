@@ -61,6 +61,7 @@ const Orders = () => {
                     <th scope="col" className="px-6 py-4">ペン</th>
                     <th scope="col" className="px-6 py-4">価格</th>
                     <th scope="col" className="px-6 py-4">注文数</th>
+                    <th scope="col" className="px-6 py-4">出荷・未出荷</th>
                     <th scope="col" className="px-6 py-4">注文日</th>
                     <th scope="col" className="px-3 py-4">
                         <button
@@ -84,6 +85,13 @@ const Orders = () => {
                                 <td className="px-6 py-2">{order.pen.name}</td>
                                 <td className="px-6 py-2">{order.pen.price}</td>
                                 <td className="px-6 py-2">{order.num}</td>
+                                <td className="px-6 py-2">
+                                    {order.shipping === 0 ? (
+                                        <span>未</span>
+                                    ) : order.shipping === 1 ? (
+                                        <span>出荷済</span>
+                                    ) : null}
+                                </td>
                                 <td className="px-6 py-2">{order.orderday}</td>
                                 <td className="px-3 py-2 text-right">
                                     <button

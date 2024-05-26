@@ -19,7 +19,8 @@ class OrderResource extends JsonResource
           'num' => $this->num,
           'orderday' => $this->orderday,
           'customer' => CustomerResource::make($this->customer),
-          'pen' => PenResource::make($this->pen)
+          'pen' => PenResource::make($this->pen),
+          'shipping' => $this->shipping
         ];
     }
 }
