@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useRouter } from "next/navigation";
+import {array} from "prop-types";
 
 const http = axios.create({
     baseURL: 'http://localhost:8000',
@@ -23,6 +24,14 @@ const Pens = () => {
     useEffect(() => {
         getPens();
     }, []);
+
+    const deletePen = async (id: number) => {
+        if (confirm('削除しますか？')) {
+            http.delete(`/api/pens/${id}`).then(() => {
+                getPens();
+            });
+        }
+    }
 
     return (
         <div className="relative overflow-x-auto p-5">
@@ -63,7 +72,9 @@ const Pens = () => {
                                     <td className="px-3 py-2">
                                         <button
                                             className="px-2 py-1 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-500 text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none"
-                                            onClick={()=>{}}
+                                            onClick={()=>{
+                                                deletePen(pen.id);
+                                            }}
                                         >削除</button>
                                     </td>
                                 </tr>
