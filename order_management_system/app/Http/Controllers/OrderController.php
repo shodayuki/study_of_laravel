@@ -6,7 +6,9 @@ use App\Http\Requests\OrderStoreRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\OrderResource;
+use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Pen;
 use Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller
@@ -32,12 +34,18 @@ class OrderController extends Controller
         ], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+  /**
+   * @return JsonResponse
+   */
+    public function create(): JsonResponse
     {
-        //
+        $pens = Pen::all();
+        $customers = Customer::all();
+
+        return response()->json([
+            'pens' => $pens,
+            'customers' => $customers,
+        ], 200);
     }
 
   /**

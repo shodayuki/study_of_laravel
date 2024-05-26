@@ -21,6 +21,23 @@ const CreatePage = () => {
 
     const router = useRouter();
 
+    const [pens, setPens] = useState({});
+    const [customers, setCustomers] = useState({});
+    const url = 'http://localhost:8000/api/orders/create';
+
+
+    // @ts-ignore
+    const getJsons = async (url) => {
+        const response = await fetch(url);
+        const json = await response.json();
+        setPens(json.pens);
+        setCustomers(json.customers);
+    }
+
+    useEffect(() => {
+        getJsons(url);
+    }, []);
+
     const createOrder = async () => {
         const requestBody = {
             customer_id: customer_id,
@@ -50,23 +67,27 @@ const CreatePage = () => {
                 <div className="px-4 py-2">
                     <p>顧客IDとペンID、注文数を入力して、登録ボタンをクリックしてください</p>
                 </div>
-                <input
-                    type="text"
-                    className='my-3 peer py-3 px-2 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
-                    placeholder='顧客ID'
-                    onChange={(e) => {
-                        setCustomer_id(e.target.value);
-                    }}
-                />
+                <select
+                    id="customerSelect"
+                    onChange={(e) => setCustomer_id(e.target.value)}
+                    className="my-3 py-3 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                >
+                    <option value="">顧客を選択してください</option>
+                    {Array.isArray(customers) && customers.map((customer) => (
+                        <option key={customer.id} value={customer.id}>{customer.name}</option>
+                    ))}
+                </select>
                 <div className="ml-4 text-red-500">{customer_idMessage}</div>
-                <input
-                    type="text"
-                    className='my-3 peer py-3 px-2 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none'
-                    placeholder='ペンID'
-                    onChange={(e) => {
-                        setPen_id(e.target.value);
-                    }}
-                />
+                <select
+                    id="penSelect"
+                    onChange={(e) => setPen_id(e.target.value)}
+                    className="my-3 py-3 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                >
+                    <option value="">ペンを選択してください</option>
+                    {Array.isArray(pens) && pens.map((pen) => (
+                        <option key={pen.id} value={pen.id}>{pen.name}</option>
+                    ))}
+                </select>
                 <div className="ml-4 text-red-500">{pen_idMessage}</div>
                 <input
                     type="text"
@@ -83,7 +104,8 @@ const CreatePage = () => {
                         onClick={() => {
                             createOrder();
                         }}
-                    >登録</button>
+                    >登録
+                    </button>
                 </div>
             </div>
         </div>
