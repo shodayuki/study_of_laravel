@@ -1,15 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
+import { useRouter } from "next/navigation";
 
 const http = axios.create({
     baseURL: 'http://localhost:8000',
     withCredentials: true,
+    withXSRFToken: true,
 });
 
 const Pens = () => {
     const [pens, setPens] = useState([]);
+    const router = useRouter();
 
     const getPens = async () => {
         const response = await fetch('http://localhost:8000/api/pens');
@@ -25,13 +28,21 @@ const Pens = () => {
         <div className="relative overflow-x-auto p-5">
             <table className="min-w-full divide-y dark:divide-neutral-700">
                 <thead>
-                    <tr>
-                        <th scope="col" className="px-6 py-4">ID</th>
-                        <th scope="col" className="px-6 py-4">名前</th>
-                        <th scope="col" className="px-6 py-4">価格</th>
-                        <th scope="col" className="px-3 py-4"></th>
-                        <th scope="col" className="px-3 py-4"></th>
-                    </tr>
+                <tr>
+                    <th scope="col" className="px-6 py-4">ID</th>
+                    <th scope="col" className="px-6 py-4">名前</th>
+                    <th scope="col" className="px-6 py-4">価格</th>
+                    <th scope="col" className="px-3 py-4"></th>
+                    <th scope="col" className="px-3 py-4"></th>
+                    <th scope="col" className="px-3 py-4">
+                        <button
+                            className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                            onClick={()=> {
+                                router.push('/pens/create');
+                            }}
+                        >新規登録</button>
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
                     {
