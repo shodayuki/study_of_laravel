@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import button from "@/components/Button";
 
 const http = axios.create({
     baseURL: 'http://localhost:8000',
@@ -39,6 +40,14 @@ const Orders = () => {
                 getOrders(url);
             });
         }
+    }
+
+    const shipOrder = async (id: number) => {
+        http.put(`/api/orders/${id}`).then(() => {
+            getOrders(url);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     const handleNextPage = () => {
@@ -87,27 +96,36 @@ const Orders = () => {
                                 <td className="px-6 py-2">{order.num}</td>
                                 <td className="px-6 py-2">
                                     {order.shipping === 0 ? (
-                                        <span>未</span>
+                                        <button
+                                            className="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-500 text-white hover:bg-yellow-600 disabled:opacity-50 disabled:pointer-events-none"
+                                            onClick={() => {
+                                                shipOrder(order.id);
+                                            }}
+                                        >未</button>
                                     ) : order.shipping === 1 ? (
                                         <span>出荷済</span>
                                     ) : null}
                                 </td>
                                 <td className="px-6 py-2">{order.orderday}</td>
                                 <td className="px-3 py-2 text-right">
-                                    <button
-                                        className="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none"
-                                        onClick={() => {
-                                            router.push(`/orders/edit/${order.id}`);
-                                        }}
-                                    >編集</button>
+                                    {order.shipping === 0 ? (
+                                        <button
+                                            className="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none"
+                                            onClick={() => {
+                                                router.push(`/orders/edit/${order.id}`);
+                                            }}
+                                        >編集</button>
+                                    ): null}
                                 </td>
                                 <td className="px-3 py-2">
-                                    <button
-                                        className="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-500 text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none"
-                                        onClick={()=>{
-                                            deleteOrder(order.id);
-                                        }}
-                                    >削除</button>
+                                    {order.shipping === 0 ? (
+                                        <button
+                                            className="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-500 text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none"
+                                            onClick={() => {
+                                                deleteOrder(order.id);
+                                            }}
+                                        >削除</button>
+                                    ): null}
                                 </td>
                             </tr>
                         )

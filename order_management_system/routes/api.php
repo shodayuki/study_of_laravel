@@ -21,3 +21,4 @@ Route::get('/orders/create', [OrderController::class, 'create']);
 Route::get('/orders/{order:id}', [OrderController::class, 'edit']);
 Route::patch('/orders/{order:id}', [OrderController::class, 'update']);
 Route::delete('/orders/{order:id}', [OrderController::class, 'delete']);
+Route::put('/orders/{order:id}', [OrderController::class, 'ship']);

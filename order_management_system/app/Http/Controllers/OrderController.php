@@ -117,4 +117,20 @@ class OrderController extends Controller
             'message' => '無事に削除しました'
         ], 200);
     }
+
+    public function ship($id): JsonResponse
+    {
+        $order = Order::find($id);
+
+        if (!$order) {
+            return response()->json(['error' => 'Order not found.'], 404);
+        }
+
+        $order->shipping = 1;
+        $order->save();
+
+        return response()->json([
+            'message' => '出荷済にしました'
+        ], 200);
+    }
 }
