@@ -59,11 +59,11 @@ class PenController extends Controller
     /**
      * 更新
      *
-     * @param Request $request
+     * @param PenStoreRequest $request
      * @param Pen $pen
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Pen $pen): \Illuminate\Http\JsonResponse
+    public function update(PenStoreRequest $request, Pen $pen): \Illuminate\Http\JsonResponse
     {
       $pen->fill($request->all());
       $pen->save();
