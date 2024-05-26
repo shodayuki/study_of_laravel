@@ -22,10 +22,10 @@ const Orders = () => {
         }
         const response = await fetch(url);
         const json = await response.json();
-        setOrders(json.data.data);
-        console.log(json.data.data);
-        setInfo(json.data);
+        setOrders(json.data);
         console.log(json.data);
+        setInfo(json.meta);
+        console.log(json.meta);
     }
 
     useEffect(() => {
@@ -80,9 +80,9 @@ const Orders = () => {
                         return (
                             <tr key={order.id} className="bg-white border-b">
                                 <td scope="row" className="px-6 py-2">{order.id}</td>
-                                <td className="px-6 py-2">{order.customer_id}</td>
-                                <td className="px-6 py-2">{order.pen_id}</td>
-                                <td className="px-6 py-2"></td>
+                                <td className="px-6 py-2">{order.customer.name}</td>
+                                <td className="px-6 py-2">{order.pen.name}</td>
+                                <td className="px-6 py-2">{order.pen.price}</td>
                                 <td className="px-6 py-2">{order.num}</td>
                                 <td className="px-6 py-2">{order.orderday}</td>
                                 <td className="px-3 py-2 text-right">
