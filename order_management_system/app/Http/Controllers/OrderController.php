@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+  /**
+   * @return \Illuminate\Http\JsonResponse
+   */
+    public function index():JsonResponse
     {
-        //
+        $orders = Order::paginate(4);
+
+        return response()->json([
+          'data' => $orders
+        ], 200);
     }
 
     /**
