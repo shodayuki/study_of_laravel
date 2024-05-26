@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderStoreRequest;
-use App\Http\Requests\StoreOrderRequest;
-use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Customer;
 use App\Models\Order;
@@ -106,11 +104,16 @@ class OrderController extends Controller
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
+  /**
+   * @param Order $order
+   * @return JsonResponse
+   */
+    public function delete(Order $order): JsonResponse
     {
-        //
+        $order->delete();
+
+        return response()->json([
+            'message' => '無事に削除しました'
+        ], 200);
     }
 }
