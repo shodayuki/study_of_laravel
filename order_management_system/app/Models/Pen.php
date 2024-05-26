@@ -13,4 +13,9 @@ class Pen extends Model
       'name',
       'price'
     ];
+
+    public function orders()
+    {
+      return $this->hasMany(Order::class);
+    }
 }
