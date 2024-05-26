@@ -4,9 +4,9 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const http = axios.create({
-    baseURL: 'https://localhost:8000',
+    baseURL: 'http://localhost:8000',
     withCredentials: true,
-    withXSRFToken: true
+    withXSRFToken: true,
 });
 
 const CreatePage = () => {
