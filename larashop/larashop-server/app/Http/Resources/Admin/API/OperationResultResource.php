@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Larashop\API;
+namespace App\Http\Resources\Admin\API;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

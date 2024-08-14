@@ -5,8 +5,8 @@ namespace App\Http\Resources\Larashop\API;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin \App\Services\Larashop\Dtos\OperationResult */
-class OperationResultResource extends JsonResource
+/** @mixin \App\Models\DealEvent */
+class DealEventResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,7 +16,10 @@ class OperationResultResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'success' => $this->success,
+            'id' => $this->id,
+            'actor_type' => $this->actor_type,
+            'event_type' => $this->event_type,
+            'created_at' => $this->created_at,
         ];
     }
 }
