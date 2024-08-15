@@ -89,12 +89,12 @@ class ProductService implements ProductServiceInterface
      * @param User $user
      * @return Collection<Product>
      */
-//    public function getPurchasedProductsByUser(User $user): Collection
-//    {
-//        $products = $user->dealsAsBuyer()->with('product')->get()->pluck('product');
-//
-//        return $products;
-//    }
+    public function getPurchasedProductsByUser(User $user): Collection
+    {
+        $products = $user->dealsAsBuyer()->with('product')->get()->pluck('product');
+
+        return $products;
+    }
 
     /*
      * 出品商品一覧取得
@@ -102,10 +102,10 @@ class ProductService implements ProductServiceInterface
      * @param User $user
      * @return Collection<Product>
      */
-//    public function getListedProductsByUser(User $user): Collection
-//    {
-//        $products = $user->dealsAsSeller()->with('product')->get()->pluck('product');
-//
-//        return $products;
-//    }
+    public function getListedProductsByUser(User $user): Collection
+    {
+        $products = $user->dealsAsSeller()->with('product')->get()->pluck('product');
+
+        return $products;
+    }
 }
