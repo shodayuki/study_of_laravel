@@ -113,18 +113,18 @@ class AuthService implements AuthServiceInterface
      * 
      * @return OperationResult
      */
-//    public function signout(): OperationResult
-//    {
-//        if (!Auth::check()) {
-//            return new OperationResult(false);
-//        }
-//
-//        /** @var User $user **/
-//        $user = Auth::user();
-//
-//        $user->tokens()->delete();
-//        return new OperationResult(true);
-//    }
+    public function signout(): OperationResult
+    {
+        if (!Auth::check()) {
+            return new OperationResult(false);
+        }
+
+        /** @var User $user **/
+        $user = Auth::user();
+
+        $user->tokens()->delete();
+        return new OperationResult(true);
+    }
 
     /**
      * 認証情報が正しいか検証する

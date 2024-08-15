@@ -100,10 +100,10 @@ class AuthController extends Controller
      * @param  SignoutRequest $request
      * @return OperationResultResource
      */
-//    public function signout(SignoutRequest $request)
-//    {
-//        $operationResult = $this->authService->signout();
-//
-//        return new OperationResultResource($operationResult);
-//    }
+    public function signout(SignoutRequest $request)
+    {
+        $operationResult = $this->authService->signout();
+
+        return new OperationResultResource($operationResult);
+    }
 }
