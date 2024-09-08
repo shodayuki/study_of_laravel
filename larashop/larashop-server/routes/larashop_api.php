@@ -36,8 +36,8 @@ Route::middleware(['auth:larashop_api', 'verified'])->group(function () {
     Route::get('/me/listed_products/{product}/deal', [MeController::class, 'getListedProductDeal']);
 
     Route::post('/products', [ProductController::class, 'store']);
-//
-//    Route::post('/products/{product}/deal/payment_intent', [ProductDealController::class, 'createPaymentIntent']);
+
+    Route::post('/products/{product}/deal/payment_intent', [ProductDealController::class, 'createPaymentIntent']);
 //    Route::post('/products/{product}/deal/payment_intent/verify', [ProductDealController::class, 'verifyPaymentIntent']);
 //    Route::post('/products/{product}/deal/cancel', [ProductDealController::class, 'cancel']);
 //    Route::post('/products/{product}/deal/report_delivery', [ProductDealController::class, 'reportDelivery']);
